@@ -1,0 +1,24 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+# Read data
+data = pd.read_csv("/Users/MANIKANTA.N/Downloads/oulad-students.csv")
+# Convert factors
+data['code_module'] = data['code_module'].astype('category')
+data['code_presentation'] = data['code_presentation'].astype('category')
+data['gender'] = data['gender'].astype('category')
+data['region'] = data['region'].astype('category')
+data['highest_education'] = data['highest_education'].astype('category')
+data['imd_band'] = data['imd_band'].astype('category')
+data['age_band'] = data['age_band'].astype('category')
+data['num_of_prev_attempts'] = data['num_of_prev_attempts'].astype('category')
+data['disability'] = data['disability'].astype('category')
+data['final_result'] = data['final_result'].astype('category')
+# Drop rows with missing values
+data.dropna(inplace=True)
+# Split data into train and test
+train_data, test_data = train_test_split(data, test_size=0.25, random_state=12
+# Train the classification model (logistic regression)
+X_train = train_data.drop(columns=['final_result'])
+y_train = train_data['final_result']
+model = LogisticRegression(max_iter=1000)
